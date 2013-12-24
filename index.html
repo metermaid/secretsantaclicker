@@ -1,0 +1,60 @@
+<html>
+<head>
+	<title>Secret Santa Clicker</title>
+	<!-- graphics assets from glitch the game / tinyspeck and a dude who compiled them into a background rubberduck -->
+  <link href='http://fonts.googleapis.com/css?family=Domine|Libre+Baskerville:700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="styles/less.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/clicker.js"></script>
+</head>
+<body>
+	<div id="container">
+		<h2>Secret Santa Clicker</h2>
+		<blockquote id="intro">
+		Once upon a time, there was a land called HSBC. It was a magical place, full of little creatures called "co-ops" who worked hard and clicked things all day. One day, Santa looked at the Effective Business Practices of HSBC, and decided, "Ho ho ho! I can just have co-ops make my presents instead of elves! It would be a lot cheaper!" If you help Santa make ONE MILLION GIFTS, he will give you your Secret Santa gift!
+		</blockquote>
+    <button id="click" type="button">Make Gifts</button>
+    <button id="team_lunch" type="button">Team Lunch! Make 100 Presents!</button>
+    <p>
+	    Gifts: <span id="total_clicks">0</span><br />
+	    Gifts per <small id="time_period">1.00</small> second: <span id="clicks_per_second">0</span>
+    </p>
+    
+    <h3>Santa Trading Post</h3>
+    <p id="random">Tools make Gifts faster! Did I say Tools? I mean people.</p>
+    <div class="item">
+	    <label>Co-op Student <small>(Automatically make 1 Gift)</small></label>
+	    <button id="buy_click" type="button">Trade for 10 Gifts</button>
+	    <img src="images/coop.png">
+	    <small id="autoclicker_level">0 Students Toiling Away</small>
+    </div>
+    <div class="item">
+        <label>Full Timer <small>(Automatically Makes 10 Gifts)</small></label>
+        <button id="buy_click2" type="button">Trade for 1000 Gifts</button>
+        <img src="images/fulltimer.png">
+        <small id="autoclicker2_level">0 Full Timers Working Hard</small>
+    </div>
+    <div class="item">
+    <label>Nintendo Wii</label>
+    <small>(Increases Gifts per Click)</small>
+    <button id="upgrade_click" type="button">Trade for 100 Gifts</button>
+    <img src="images/wii.png">
+    <small id="click_level">0 Wiis</small>
+    </div>
+    <div class="item">
+    <label>Coffee Coffee Coffee</label>
+    <small>(Speed up by 0.1 Seconds)</small>
+    <button id="upgrade_speed" type="button">Trade for 100 Gifts</button>
+    <img src="images/coffee.png">
+    <small id="speed_level">0 Coffees</small>
+    </div>
+    <div class="item">
+    <label>Secret Santa Gift</label>
+    <small>(PRESENT!!! SECRETS!!!)</small>
+    <button id="ss_gift" type="button">Trade for 1000000 Gifts</button>
+    <img src="images/present.png">
+    </div>
+	</div>
+</body>
+</html>
