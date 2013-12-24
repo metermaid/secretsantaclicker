@@ -31,13 +31,16 @@ var arr =
     "How's that work term report coming?",
     "How are ALL the microwaves in use?",
     "Anybody up for a game of L4D2?",
-    "There are no 'chauns here."
+    "There are no 'chauns here.",
+    "Um, what does 'content' mean?"
     ]
 //functions
 function team_lunch_formula(value) {
     return Math.floor(100 * Math.pow(1.2, value));
 }
-
+function number_with_commas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function click_bonus_price(value) {
     return Math.pow(3, value) * 300;
 }
@@ -92,12 +95,12 @@ function update_view() {
 
     $("#clicks_per_second").text(player.autoclicks + 10 * player.autoclicker_2);
 
-    $("#upgrade_speed").text('Trade for ' + speed_bonus_price(player.upgrade_speed) + ' Gifts');
-    $("#upgrade_click").text('Trade for ' + click_bonus_price(player.click_bonus) + ' Gifts');
-    $("#buy_click").text('Trade for ' + player.cost + ' Gifts');
-    $("#buy_click2").text('Trade for ' + player.cost_2 + ' Gifts');
+    $("#upgrade_speed").text('Trade for ' + number_with_commas(speed_bonus_price(player.upgrade_speed)) + ' Gifts');
+    $("#upgrade_click").text('Trade for ' + number_with_commas(click_bonus_price(player.click_bonus)) + ' Gifts');
+    $("#buy_click").text('Trade for ' + number_with_commas(player.cost) + ' Gifts');
+    $("#buy_click2").text('Trade for ' + number_with_commas(player.cost_2) + ' Gifts');
 
-    $("#team_lunch").text("Team Lunch! Make " + team_lunch_formula(player.autoclicks) + " Presents!");
+    $("#team_lunch").text("Team Lunch! Make " + number_with_commas(team_lunch_formula(player.autoclicks)) + " Presents!");
 
     $("#autoclicker_level").text(player.autoclicks + ' Students Toiling Away');
     $("#autoclicker2_level").text(player.autoclicker_2 + ' Full Timers Working Hard');
