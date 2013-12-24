@@ -34,6 +34,18 @@ var arr =
     "There are no 'chauns here."
     ]
 //functions
+function team_lunch_formula(value) {
+    return 100 * Math.floor(Math.pow(1.2, value));
+}
+
+function click_bonus_price(value) {
+    return Math.pow(3, value) * 300;
+}
+
+function speed_bonus_price(value) {
+    return Math.pow(3, value) * 100;
+}
+
 function update_total_clicks() { //updates the number of player.clicks   
     $("#total_clicks").text(player.clicks);
 }
@@ -48,8 +60,7 @@ function update_workers() {
     $("#time_period").text(parseFloat(player.click_rate/1000.0).toFixed(2));
     clearInterval(player.interval_auto);
     player.interval_auto = setInterval(function () { 
-        player.clicks += player.autoclicks;
-        player.clicks += player.autoclicker_2 * 10;
+        player.clicks += player.autoclicks + player.autoclicker_2 * 10;
         update_total_clicks(); 
     }, player.click_rate);
 }
@@ -81,12 +92,12 @@ function update_view() {
 
     $("#clicks_per_second").text(player.autoclicks + 10 * player.autoclicker_2);
 
-    $("#upgrade_speed").text('Trade for ' + ((Math.pow(3, player.upgrade_speed)) * 100) + ' Gifts');
-    $("#upgrade_click").text('Trade for ' + ((Math.pow(3, player.click_bonus)) * 300) + ' Gifts');
+    $("#upgrade_speed").text('Trade for ' + speed_bonus_price(player.upgrade_speed) + ' Gifts');
+    $("#upgrade_click").text('Trade for ' + click_bonus_price(player.click_bonus) + ' Gifts');
     $("#buy_click").text('Trade for ' + player.cost + ' Gifts');
     $("#buy_click2").text('Trade for ' + player.cost_2 + ' Gifts');
 
-    $("#team_lunch").text("Team Lunch! Make " + (100 + 100 * player.autoclicks) + " Presents!");
+    $("#team_lunch").text("Team Lunch! Make " + team_lunch_formula(player.autoclicks) + " Presents!");
 
     $("#autoclicker_level").text(player.autoclicks + ' Students Toiling Away');
     $("#autoclicker2_level").text(player.autoclicker_2 + ' Full Timers Working Hard');
@@ -110,7 +121,7 @@ function load_game() {
 
 function display_lunch() {
     $("#team_lunch").show();
-    $("#team_lunch").text("Team Lunch! Make " +  Math.max(100 * Math.floor(Math.pow(1.2, player.autoclicks)), 100*(player.autoclicks+1)) + " Presents!");
+    $("#team_lunch").text("Team Lunch! Make " +  team_lunch_formula(player.autoclicks) + " Presents!");
 }
 
 function display_text() {
@@ -126,7 +137,7 @@ $("#click").click(function() {
 });
 
 $("#team_lunch").click(function() {  
-    player.clicks += Math.max(100 * Math.floor(Math.pow(1.2, player.autoclicks)), 100*(player.autoclicks+1)); 
+    player.clicks += team_lunch_formula(player.autoclicks); 
     update_total_clicks(); //updates the text
     $(this).hide();    
 });
@@ -148,16 +159,14 @@ $("#buy_click2").click(function() {
 });
 
 $("#upgrade_speed").click(function() {  
-    var upgrade_cost =  (Math.pow(3, player.upgrade_speed)) * 100;
-    if (!buy_something(upgrade_cost, this)) return;
+    if (!buy_something(speed_bonus_price(player.upgrade_speed), this)) return;
     player.upgrade_speed++; 
     player.click_rate = 1000 - (player.upgrade_speed * 100);
     update_view();
     save_game();
 });
 $("#upgrade_click").click(function() {  
-    var click_bonus_cost =  (Math.pow(3, player.click_bonus)) * 300;
-    if (!buy_something(click_bonus_cost, this)) return;
+    if (!buy_something(click_bonus_price(player.click_bonus), this)) return;
     player.click_bonus++; 
     update_view();
     save_game();
