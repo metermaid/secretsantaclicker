@@ -35,7 +35,7 @@ var arr =
     ]
 //functions
 function team_lunch_formula(value) {
-    return 100 * Math.floor(Math.pow(1.2, value));
+    return Math.floor(100 * Math.pow(1.2, value));
 }
 
 function click_bonus_price(value) {
@@ -50,7 +50,7 @@ function update_total_clicks() { //updates the number of player.clicks
     $("#total_clicks").text(player.clicks);
 }
 function buy_something(c, button) {
-    if (player.clicks <= c) {
+    if (player.clicks < c) {
         return false;
     }
     player.clicks -= c;
