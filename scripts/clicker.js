@@ -60,7 +60,6 @@ function buy_something(c, button) {
     return true;
 }
 function update_workers() {
-    $("#time_period").text(parseFloat(player.click_rate/1000.0).toFixed(2));
     clearInterval(player.interval_auto);
     player.interval_auto = setInterval(function () { 
         player.clicks += player.autoclicks + player.autoclicker_2 * 10;
@@ -93,7 +92,7 @@ function update_view() {
     $("#speed_level").text(player.upgrade_speed + ' COFFEES');
     $("#click_level").text(player.click_bonus + ' Wiis');
 
-    $("#clicks_per_second").text(player.autoclicks + 10 * player.autoclicker_2);
+    $("#clicks_per_second").text(((player.autoclicks + 10 * player.autoclicker_2)*1000/player.click_rate).toPrecision(3));
 
     $("#upgrade_speed").text('Trade for ' + number_with_commas(speed_bonus_price(player.upgrade_speed)) + ' Gifts');
     $("#upgrade_click").text('Trade for ' + number_with_commas(click_bonus_price(player.click_bonus)) + ' Gifts');
@@ -138,7 +137,6 @@ $("#click").click(function() {
     player.clicks += Math.pow(2,player.click_bonus); 
     update_total_clicks(); //updates the text
 });
-
 $("#team_lunch").click(function() {  
     player.clicks += team_lunch_formula(player.autoclicks); 
     update_total_clicks(); //updates the text
